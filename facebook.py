@@ -113,28 +113,11 @@ def query():
     
     #create cursor
     c=conn.cursor()
-
-    #select query of the database
-    '''
-    OID is auto-incrementing integer value,  
-    that can be automatically assigned to each row of a table created WITH OIDS option.
-    ID can be used as an identity (auto-increment) primary key column
-    '''
     c.execute("SELECT *,oid FROM user")
 
     #Fetches the existing rows from a result set
     records=c.fetchall()
     print(records)
-    
-
-    #output of records in database
-    #Loop through the results
-    # for record in records:
-    #     print_records+=str(record[0]) +' ' + str(record[1]) +" " + 2*'\t' + str(record[2])+ " " +'\t' + str(record[3])+ " " +'\t' + str(record[4])+ " " +'\t' + str(record[5])+ " " +'\t' + str(record[6])+ " " +'\t' + str(record[7]) + "\n"
-    # query_label=Label(root,text=print_records, anchor="w")
-    # query_label.grid(row=8,column=0,columnspan=4)
-
-#...................
 
     
     
@@ -143,13 +126,8 @@ def query():
 
     tree = ttk.Treeview(info_query, columns=columns, show='headings')
 
-    ##dimensions for the columns #BUG # no atomatic sizing
     tree.column("# 1",anchor=CENTER, stretch=NO, width=30)
-    # tree.column("# 2",anchor=CENTER, stretch=NO, width=100)
     tree.column("# 4",anchor=CENTER, stretch=NO, width=50)
-    # tree.column("# 4",anchor=CENTER, stretch=NO, width=100)
-    # tree.column("# 5",anchor=CENTER, stretch=NO, width=100)
-    # tree.column("# 6",anchor=CENTER, stretch=NO, width=100)
     tree.column("# 8",anchor=CENTER, stretch=NO, width=180)
     tree.column("# 9",anchor=CENTER, stretch=NO, width=100)
     
@@ -165,13 +143,6 @@ def query():
     tree.heading('zipcode', text='Zipcode')
     tree.heading('Serial_No',text='Database S.N.')
 
-    
-
-
-
-    # query_label=Label(info_query,text=print_records, anchor="w")
-    # query_label.grid(row=8,column=0,columnspan=4)
-
     # add data to the treeview
     for record in records:
         tree.insert('', END, values=record)
@@ -183,17 +154,7 @@ def query():
     tree.configure(yscrollcommand=vbar.set)
     vbar.grid(row=0, column=1, sticky=NS)
 
-    #horizontal scrollbar   #BUG #horizontal bar shows but doesnot work
-    hbar = ttk.Scrollbar(info_query, orient=HORIZONTAL, command=tree.xview)
-    tree.configure(xscrollcommand=hbar.set)
-    hbar.grid(row=1, column=0, sticky=EW)
     
-    # #button exit option   BUG #exit  button is not showing ..
-    # button_exit=Button(info_query,text="EXIT",command=info_query.quit,width=20,anchor='S')
-    # button_exit.grid(info_query, row=23,column=0)
-
-    # button_exit.pack()
-#......................
 
 def delete():
     '''
